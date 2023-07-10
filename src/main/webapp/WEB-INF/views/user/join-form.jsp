@@ -5,16 +5,16 @@
 <div class="container-fluid mt-3">
   <form>
     <div class="mb-3 mt-3">
-      <label for="username" class="form-label">Username:</label>
-      <input type="text" class="form-control" id="username" placeholder="Enter username">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" placeholder="Enter username" required />
     </div>
     <div class="mb-3">
-      <label for="password" class="form-label">Password:</label>
-      <input type="password" class="form-control" id="password" placeholder="Enter password">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter password" required />
     </div>
     <div class="mb-3">
-      <label for="email" class="form-label">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" required />
     </div>
   </form>
   <button id="btn-save" class="btn btn-primary">회원 가입하기</button>
