@@ -1,10 +1,6 @@
 package com.kkot.blog.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -27,7 +24,6 @@ public class Board {
     @Lob
     private String content; // 섬머노트 라이브러리 사용: <html> 태그가 포함되어 디자인 됨
 
-    @ColumnDefault("0")
     private int count;
 
     // Many = Board : One = User
