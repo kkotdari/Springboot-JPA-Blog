@@ -1,9 +1,7 @@
 package com.kkot.blog.model;
 
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -31,8 +29,9 @@ public class User {
     @Column(nullable = false, length = 50, unique = true)
     private String email;
 
-//    @ColumnDefault("'user'")
+//    @ColumnDefault("'user'") // 디폴트 값 설정
     // DB에는 RoleType이 없으므로 Enum의 타입을 알려줘야 한다.
+    // @Enumerated: 필드의 타입으로 Enum 타입을 사용
     @Enumerated(EnumType.STRING)
     private RoleType role; // Enum을 쓰는 게 좋다.
 
