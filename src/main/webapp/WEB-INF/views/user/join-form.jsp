@@ -16,9 +16,9 @@
       <label for="email" class="form-label">Email:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email">
     </div>
-    <button id="btn-save" class="btn btn-primary">회원 가입하기</button>
   </form>
+  <button id="btn-save" class="btn btn-primary">회원 가입하기</button>
 </div>
 
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>
