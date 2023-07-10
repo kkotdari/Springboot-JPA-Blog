@@ -5,10 +5,10 @@
 <div class="container-fluid mt-3">
   <form>
     <div class="mb-3 mt-3">
-      <input type="text" class="form-control" id="title" placeholder="Enter title">
+      <input type="text" class="form-control" id="title" placeholder="Enter title" required />
     </div>
     <div class="form-group">
-      <textarea class="form-control summernote" id="content" placeholder="Enter content"></textarea>
+      <textarea class="form-control summernote" id="content" placeholder="Enter content" required></textarea>
     </div>
   </form>
   <button id="btn-save" class="btn btn-primary">글 쓰기 완료</button>
