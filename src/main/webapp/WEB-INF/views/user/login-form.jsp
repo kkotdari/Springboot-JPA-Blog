@@ -3,7 +3,7 @@
 <%@ include file="../layout/header.jsp"%>
 
 <div class="container-fluid mt-3">
-  <form action="/login" method="post">
+  <form action="/login-proc" method="post">
     <div class="mb-3 mt-3">
       <label for="username" class="form-label">Username:</label>
       <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
