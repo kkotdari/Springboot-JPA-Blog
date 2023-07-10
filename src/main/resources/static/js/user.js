@@ -22,7 +22,7 @@ let index = {
             console.log(res);
             location.href="/";
         }).fail(function(error){
-            alert("JSON.stringify(error)")
+            alert("JSON.stringify(error)");
         });
     }
 }
