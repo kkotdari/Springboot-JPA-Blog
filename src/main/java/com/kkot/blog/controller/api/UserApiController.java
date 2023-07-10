@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 public class UserApiController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("api/user")
-    public ResponseDTO<Integer> postUser(@RequestBody User user){
+    @PostMapping("/auth/join-proc")
+    public ResponseDTO<Integer> postUser(@RequestBody User user) {
         user.setRole(RoleType.USER);
         int result = userService.join(user);
         return new ResponseDTO<Integer>(HttpStatus.OK.value(), result); // 자바오브젝트를 JSON으로 변환해서 리턴 (Jackson 라이브러리)
