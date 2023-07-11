@@ -4,6 +4,7 @@ import com.kkot.blog.config.auth.PrincipalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,6 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean // IoC: 리턴값을 스프링이 관리함
     public BCryptPasswordEncoder encodePwd() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     // 시큐리티가 대신 로그인할 때 password를 가로채는데 해당 password가 뭘로 해시되어 회원가입이 되었는지 알아야
