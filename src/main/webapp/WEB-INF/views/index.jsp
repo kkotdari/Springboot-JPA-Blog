@@ -3,7 +3,7 @@
 <%@ include file="layout/header.jsp"%>
 
 <div class="container-fluid mt-3">
-  <c:forEach var="board" items="${boards.content}">
+  <c:forEach var="board" items="${boardPage.content}">
   <div class="card m-2" style="width:100%">
     <div class="card-body">
       <h4 class="card-title">${board.title}</h4>
@@ -13,27 +13,23 @@
   </c:forEach>
 
   <ul class="pagination justify-content-center">
-    <c:choose>
-    <c:when test="${boards.first}">
-    <li class="page-item disabled">
-    </c:when>
-    <c:otherwise>
-    <li class="page-item">
-    </c:otherwise>
-    </c:choose>
-    <a class="page-link" href="/?page=${boards.number - 1}">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <c:choose>
-    <c:when test="${boards.last}">
-    <li class="page-item disabled">
-    </c:when>
-    <c:otherwise>
-    <li class="page-item">
-    </c:otherwise>
-    </c:choose>
-    <a class="page-link" href="/?page=${boards.number + 1}">Next</a></li>
+    <c:if test="${pageInfo.hasPrev}">
+      <li class="page-item"><a class="page-link" href="/?page=${pageInfo.prevIndex - 1}">Previous</a></li>
+    </c:if>
+
+    <c:forEach var="i" begin="${pageInfo.startNumber}" end="${pageInfo.endNumber}" step="1">
+      <c:if test="${i -1 != pageInfo.pageNo}">
+        <li class="page-item">
+      </c:if>
+      <c:if test="${i -1 == pageInfo.pageNo}">
+        <li class="page-item font-weight-bolder">
+      </c:if>
+      <a class="page-link" href="/?page=${i - 1}">${i}</a></li>
+    </c:forEach>
+
+    <c:if test="${pageInfo.hasNext}">
+      <li class="page-item"><a class="page-link" href="/?page=${pageInfo.nextIndex - 1}">Next</a></li>
+    </c:if>
   </ul>
 
 </div>
