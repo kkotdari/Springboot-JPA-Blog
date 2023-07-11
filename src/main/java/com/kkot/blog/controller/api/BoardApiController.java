@@ -15,8 +15,8 @@ public class BoardApiController {
     private BoardService boardService;
 
     @PostMapping("/api/board")
-    public ResponseDTO<Integer> postBoard(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetails principal) {
-        boardService.write(board, principal.getUser());
+    public ResponseDTO<Integer> postBoard(@RequestBody Board requestBoard, @AuthenticationPrincipal PrincipalDetails principal) {
+        boardService.write(requestBoard, principal.getUser());
         return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1); // 자바오브젝트를 JSON으로 변환해서 리턴 (Jackson 라이브러리)
     }
 
