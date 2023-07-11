@@ -1,5 +1,6 @@
 package com.kkot.blog.service;
 
+import com.kkot.blog.dto.PageDTO;
 import com.kkot.blog.model.Board;
 import com.kkot.blog.model.User;
 import com.kkot.blog.repository.BoardRepository;
@@ -15,14 +16,40 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     @Transactional
-    public void write(Board board, User user) { // title, content, count 그리고 User 데이터가 필요함
-        board.setUser(user);
-        board.setCount(0);
-        boardRepository.save(board);
+    public void write(Board requestBoard, User requestUser) { // title, content, count 그리고 User 데이터가 필요함
+        requestBoard.setUser(requestUser);
+        requestBoard.setCount(0);
+        boardRepository.save(requestBoard);
     }
 
-    public Page<Board> list(Pageable pageable){
+    public Page<Board> page(Pageable pageable){
         return boardRepository.findAll(pageable);
+    }
+
+    public PageDTO getPageInfo(Page<Board> boardPage, int pageNo) {
+        int totalPage = boardPage.getTotalPages();
+        final int GROUP_SIZE = 2; // 페이지당 아이템 수
+        // 현재 페이지를 통해 현재 페이지 그룹의 시작 페이지를 구함
+        int startNumber = (int)((Math.floor(pageNo / GROUP_SIZE) * GROUP_SIZE) + 1 <= totalPage ? (Math.floor(pageNo / GROUP_SIZE) * GROUP_SIZE) + 1 : totalPage);
+
+        // 전체 페이지 수와 현재 페이지 그룹의 시작 페이지를 통해 현재 페이지 그룹의 마지막 페이지를 구함
+        int endNumber = (startNumber + GROUP_SIZE - 1 < totalPage ? startNumber + GROUP_SIZE - 1 : totalPage);
+
+        // Prev, Next 버튼 활성화 변수
+        boolean hasPrev = true;
+        boolean hasNext = true;
+        if(startNumber == 1) {
+            hasPrev = false;
+        }
+        if(endNumber == totalPage) {
+            hasNext = false;
+        }
+
+        /* 화면에는 원래 페이지 인덱스+1 로 출력됨을 주의 */
+        int prevIndex = startNumber - GROUP_SIZE ;
+        int nextIndex = startNumber + GROUP_SIZE;
+
+        return new PageDTO(totalPage, pageNo, startNumber, endNumber, hasPrev, hasNext, prevIndex, nextIndex);
     }
 
     public Board detail(int id){
