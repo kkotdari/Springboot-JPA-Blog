@@ -1,5 +1,6 @@
 package com.kkot.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -36,8 +37,9 @@ public class Board {
     // fetch = EAGER 전략: 무조건 같이 가져온다. (처음에 댓글창이 표시되는 경우)
     // fetch = 기본 LAZY 전략: 필요할 때 가져온다. (처음에 댓글창이 접혀있는 경우)
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"board"})
     // @JoinColumn(name = "replyId") 불필요. 왜냐하면 Board 테이블에 reply_id는 필요하지 않기 때문
-    private List<Reply> reply;
+    private List<Reply> replies;
 
     @CreationTimestamp
     private Timestamp createDate;
