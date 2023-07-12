@@ -22,28 +22,37 @@
       <div>${board.content}</div>
     </div>
 
+	<div class="card">
+	    <form>
+	        <input type="hidden" id="userId" value="${principal.user.id}" />
+		    <input type="hidden" id="boardId" value="${board.id}" />
+			<div class="card-body">
+				<textarea id="reply-content" class="form-control" rows="1"></textarea>
+			</div>
+			<div class="card-footer">
+				<button type="button" id="btn-reply-save" class="btn btn-primary btn-sm">등록</button>
+			</div>
+		</form>
+	</div>
+
     <div class="card">
-    		<div class="card-header">댓글 리스트</div>
-    		<ul id="reply-box" class="list-group">
-    			<c:forEach var="reply" items="${board.replies}">
+        <div class="card-header">댓글 리스트</div>
+        <ul id="reply-box" class="list-group">
+            <c:forEach var="reply" items="${board.replies}">
 
-    				<li id="reply-${reply.id}" class="list-group-item d-flex justify-content-between">
-    					<div>${reply.content}</div>
-    					<div class="d-flex">
-    						<div class="font-italic">작성자 : ${reply.user.username} &nbsp;</div>
-    						<c:if test="${reply.user.id eq principal.user.id}">
-    							<button onClick="index.replyDelete(${board.id}, ${reply.id})" class="btn btn-primary btn-sm" style="width: 50px;">삭제</button>
-    						</c:if>
-    						<c:if test="${reply.user.id ne principal.user.id}">
-    							<div style="width: 50px; height:30.33px;"></div>
-    						</c:if>
+                <li id="reply-${reply.id}" class="list-group-item d-flex justify-content-between" style="height:50px;">
+                    <div class="d-flex">
+                    <div>${reply.content}</div>
+                    <c:if test="${reply.user.id eq principal.user.id}">
+                        <button onClick="index.deleteReply(${board.id}, ${reply.id})" class="btn btn-primary btn-sm" style="margin-left: 1.25rem; padding: 0.125rem 0.25rem;">삭제</button>
+                    </c:if>
+                    </div>
+                        <div class="font-italic">작성자 : ${reply.user.username}</div>
+                </li>
 
-    					</div>
-    				</li>
-
-    			</c:forEach>
-    		</ul>
-    	</div>
+            </c:forEach>
+        </ul>
+    </div>
 
 </div>
 
