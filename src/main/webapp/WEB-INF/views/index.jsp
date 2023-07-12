@@ -2,7 +2,7 @@
 
 <%@ include file="layout/header.jsp"%>
 
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-3" style="padding-left: 0;">
   <c:forEach var="board" items="${boardPage.content}">
   <div class="card m-2" style="width:100%">
     <div class="card-body">
