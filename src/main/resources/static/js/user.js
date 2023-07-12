@@ -21,7 +21,11 @@ let index = {
             contentType: "application/json; charset=utf-8", // 요청 body 데이터 타입(MIME 방식)
             dataType: "json" // 서버에서 응답하는 문자열의 형태가 json이면 javascript object로 변경해 줌.
         }).done(function(res){
-            alert("회원가입이 완료되었습니다.");
+            if(res.status === 500){
+                alert("회원 가입에 실패하였습니다.");
+            } else {
+                alert("회원 가입이 완료되었습니다.");
+            }
             console.log(res);
             location.href="/";
         }).fail(function(error){
