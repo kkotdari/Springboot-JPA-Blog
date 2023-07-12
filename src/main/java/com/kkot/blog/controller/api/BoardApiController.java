@@ -1,6 +1,7 @@
 package com.kkot.blog.controller.api;
 
 import com.kkot.blog.config.auth.PrincipalDetails;
+import com.kkot.blog.dto.ReplySaveRequestDTO;
 import com.kkot.blog.dto.ResponseDTO;
 import com.kkot.blog.model.Board;
 import com.kkot.blog.service.BoardService;
@@ -28,6 +29,21 @@ public class BoardApiController {
     @DeleteMapping("/api/board/{id}")
     public ResponseDTO<Integer> delete(@PathVariable int id) {
         boardService.delete(id);
+        return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    // 댓글 부분
+    // 데이터 받을 때 컨트롤러에서 dto를 만들어서 받는게 좋다.
+    // dto 사용하지 않은 이유는!!
+    @PostMapping("/api/board/{boardId}/reply")
+    public ResponseDTO<Integer> replySave(@RequestBody ReplySaveRequestDTO replySaveRequestDto) {
+        boardService.writeReply(replySaveRequestDto);
+        return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+    }
+
+    @DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+    public ResponseDTO<Integer> replyDelete(@PathVariable int replyId) {
+        boardService.deleteReply(replyId);
         return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
     }
 }
