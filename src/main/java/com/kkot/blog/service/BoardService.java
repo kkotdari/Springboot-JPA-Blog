@@ -1,9 +1,11 @@
 package com.kkot.blog.service;
 
 import com.kkot.blog.dto.PageDTO;
+import com.kkot.blog.dto.ReplySaveRequestDTO;
 import com.kkot.blog.model.Board;
 import com.kkot.blog.model.User;
 import com.kkot.blog.repository.BoardRepository;
+import com.kkot.blog.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @Transactional
     public void write(Board requestBoard, User requestUser) { // title, content, count 그리고 User 데이터가 필요함
@@ -71,5 +76,17 @@ public class BoardService {
     }
     public void delete(int id){
         boardRepository.deleteById(id);
+    }
+
+    // 댓글 부분
+    @Transactional
+    public void writeReply(ReplySaveRequestDTO replySaveRequestDTO) {
+        int result = replyRepository.mSave(replySaveRequestDTO.getUserId(), replySaveRequestDTO.getBoardId(), replySaveRequestDTO.getContent());
+        System.out.println("BoardService : "+result);
+    }
+
+    @Transactional
+    public void deleteReply(int replyId) {
+        replyRepository.deleteById(replyId);
     }
 }
