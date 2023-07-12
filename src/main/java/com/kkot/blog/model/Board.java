@@ -36,8 +36,9 @@ public class Board {
     // mappedBy: 연관관계의 주인이 아니다. (FK가 아님) DB에 컬럼을 만들지 않음. Reply 엔티티의 board 필드에 매핑함
     // fetch = EAGER 전략: 무조건 같이 가져온다. (처음에 댓글창이 표시되는 경우)
     // fetch = 기본 LAZY 전략: 필요할 때 가져온다. (처음에 댓글창이 접혀있는 경우)
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"board"})
+    @OrderBy("id desc")
     // @JoinColumn(name = "replyId") 불필요. 왜냐하면 Board 테이블에 reply_id는 필요하지 않기 때문
     private List<Reply> replies;
 
